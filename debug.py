@@ -2,30 +2,35 @@ from customer import Customer
 from coffee import Coffee
 from order import Order
 
-# Create customers
+
+
+# Create Customers
 alice = Customer("Alice")
 bob = Customer("Bob")
 
-# Create coffees
+# Create Coffees
 latte = Coffee("Latte")
 espresso = Coffee("Espresso")
 
-# Create orders
-o1 = alice.create_order(latte, 4.0)
-o2 = alice.create_order(latte, 5.0)
-o3 = bob.create_order(latte, 6.0)
-o4 = bob.create_order(espresso, 3.5)
+# Create Orders
+alice.create_order(latte, 4.0)
+alice.create_order(latte, 5.0)
+bob.create_order(latte, 6.0)
+bob.create_order(espresso, 3.5)
 
-# Test relationships
-print("Alice's Orders:", alice.orders())         # Should show 2 orders
-print("Alice's Coffees:", [c.name for c in alice.coffees()])  # ['Latte']
+# Customer tests
+print("Alice's Orders:", alice.orders())
+print("Alice's Coffees:", [coffee.coffee_name for coffee in alice.coffees()])
 
-print("Latte's Orders:", latte.orders())         # 3 orders
-print("Latte's Customers:", [c.name for c in latte.customers()])  # ['Alice', 'Bob']
+# Coffee tests
+print("Latte Orders:", latte.orders())
+print("Latte Customers:", [customer.customer_name for customer in latte.customers()])
+print("Latte Total Orders:", latte.num_orders())
+print("Latte Average Price:", latte.average_price())
 
-print("Latte total orders:", latte.num_orders())  # 3
-print("Latte average price:", latte.average_price())  # 5.0
-
-# Test most aficionado
+# Test most_aficionado
 top_customer = Customer.most_aficionado(latte)
-print("Top spender on Latte:", top_customer.name if top_customer else "None")
+if top_customer:
+    print("Top spender on Latte:", top_customer.customer_name)
+else:
+    print("No orders for this coffee yet.")

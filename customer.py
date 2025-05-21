@@ -17,11 +17,11 @@ class Customer:
             raise ValueError("Name must be a string  with a maximum number of 15 characters")
     
     def orders(self):
+        from order import Order
         # Return all orders where this customer is the one in the order
         return [order for order in Order.all() if order.customer == self]
     
     def coffees(self):
-        from order import Order
         # Return unique Coffee instances this customer has ordered
         return list(set(order.coffee for order in self.orders()))
 

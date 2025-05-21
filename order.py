@@ -1,13 +1,14 @@
 from customer import Customer
 from coffee import Coffee
+
 class Order:
     # class-level list to store all orders
     all_orders = []  
 
 
     def __init__(self, customer, coffee, price):
-        self.customer = customer
-        self.coffee = coffee 
+        self._customer = customer
+        self._coffee = coffee 
         self.price = price
        
         Order.all_orders.append(self)
@@ -36,4 +37,7 @@ class Order:
     @classmethod
     def all(cls):
         return cls.all_orders
-        
+
+     # Add __repr__ method to get friendly output   
+    def __repr__(self):
+        return f"Order({self.customer.customer_name}, {self.coffee.coffee_name}, ${self.price})"
